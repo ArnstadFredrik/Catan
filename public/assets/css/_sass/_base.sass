@@ -1,0 +1,107 @@
+//main: ../main.sass
+
+body
+  font-family: $font
+  font-size: $fontSize
+  color: $fontColor
+  display: grid
+  justify-items: center
+  align-items: center
+
+p
+  font-size: 1.5em
+
+.board
+  display: grid
+  grid-template-columns: repeat(5,1fr)
+  grid-template-rows: repeat(5,1fr)
+  grid-gap: 20px
+
+.randomBtn
+  position: absolute
+  bottom: 0px
+  background: lightgray
+  padding: 20px
+
+.row1
+  grid-row: 1/2
+  left: $tile+1vw
+.row2
+  grid-row: 2/3
+  left: ($tile+1)/2
+.row3
+  grid-row: 3/4
+  left: $tile - $tile
+.row4
+  grid-row: 4/5
+  left: ($tile+1)/2
+.row5
+  grid-row: 5/6
+  left: $tile+1vw
+
+.tile
+  position: relative
+  width: $tile
+  height: ($tile/2) + 1vw
+  margin-top: $tile/5
+  background: lightgray
+  &:before
+    position: absolute
+    top: -2.5vw
+    right: 0
+    content: ""
+    border:
+      right: 5vw solid transparent
+      bottom: 2.5vw solid lightgray
+      left: 5vw solid transparent
+  &:after
+    position: absolute
+    bottom: -2.5vw
+    right: 0
+    content: ""
+    border:
+      right: 5vw solid transparent
+      top: 2.5vw solid lightgray
+      left: 5vw solid transparent
+
+.field
+  background: $field
+  &:before
+    border-bottom: 2.5vw solid $field
+  &:after
+    border-top: 2.5vw solid $field
+
+.forest
+  background: $forest
+  &:before
+    border-bottom: 2.5vw solid $forest
+  &:after
+    border-top: 2.5vw solid $forest
+
+.pasture
+  background: $pasture
+  &:before
+    border-bottom: 2.5vw solid $pasture
+  &:after
+    border-top: 2.5vw solid $pasture
+
+.mountain
+  background: $mountain
+  &:before
+    border-bottom: 2.5vw solid $mountain
+  &:after
+    border-top: 2.5vw solid $mountain
+
+.hill
+  background: $hill
+  &:before
+    border-bottom: 2.5vw solid $hill
+  &:after
+    border-top: 2.5vw solid $hill
+
+.desert
+  background: $desert
+  &:before
+    border-bottom: 2.5vw solid $desert
+  &:after
+    border-top: 2.5vw solid $desert
