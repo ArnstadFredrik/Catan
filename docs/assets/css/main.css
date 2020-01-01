@@ -56,6 +56,10 @@ p {
   height: 6vw;
   margin-top: 2vw;
   background: lightgray;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  font-size: 2rem;
 }
 
 .tile:before {
@@ -76,6 +80,15 @@ p {
   border-right: 5vw solid transparent;
   border-top: 2.5vw solid lightgray;
   border-left: 5vw solid transparent;
+}
+
+[class="7 number"] {
+  display: none;
+}
+
+[class="6 number"],
+[class="8 number"] {
+  color: #bf6262;
 }
 
 .field {

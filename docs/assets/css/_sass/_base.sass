@@ -45,6 +45,10 @@ p
   height: ($tile/2) + 1vw
   margin-top: $tile/5
   background: lightgray
+  display: grid
+  justify-content: center
+  align-content: center
+  font-size: 2rem
   &:before
     position: absolute
     top: -2.5vw
@@ -63,6 +67,12 @@ p
       right: 5vw solid transparent
       top: 2.5vw solid lightgray
       left: 5vw solid transparent
+
+[class="7 number"]
+  display: none
+[class="6 number"],
+[class="8 number"]
+    color: #bf6262
 
 .field
   background: $field
