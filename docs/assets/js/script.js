@@ -185,11 +185,12 @@ let game = {
   }
 }
 
-const randomizeButton = document.querySelector('.randomBtn')
+const randomizeButton = document.querySelector('.board')
 randomizeButton.addEventListener('click',(e) => {
   e.preventDefault()
   game.randomNumbers()
-  game.createBoard(game.randomBoard())
+  game.randomBoard()
+  game.createBoard()
 })
 
 game.createBoard()
