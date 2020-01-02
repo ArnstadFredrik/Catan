@@ -7,21 +7,31 @@ body
   display: grid
   justify-items: center
   align-items: center
+  width: 100vw
+  height: 100vh
+  margin: 0
+  grid-template-rows: 20vw 1fr 20vw
 
 p
-  font-size: 1.5em
+  font-size: $tile/4
 
 .board
   display: grid
   grid-template-columns: repeat(5,1fr)
   grid-template-rows: repeat(5,1fr)
-  grid-gap: 20px
+  grid-gap: 2vw
 
 .randomBtn
-  position: absolute
+  position: relative
   bottom: 0px
   background: lightgray
   padding: 20px
+  width: 100%
+  height: 100%
+  box-sizing: border-box
+
+.grid
+  display: grid
 
 .row1
   grid-row: 1/2
@@ -40,39 +50,66 @@ p
   left: $tile+1vw
 
 .tile
+  z-index: 1
   position: relative
   width: $tile
-  height: ($tile/2) + 1vw
+  height: ($tile/2) + 2.5vw
   margin-top: $tile/5
   background: lightgray
   display: grid
   justify-content: center
   align-content: center
-  font-size: 2rem
   &:before
+    z-index: 1
     position: absolute
-    top: -2.5vw
+    top: (-$tile/6.1)
     right: 0
     content: ""
     border:
-      right: 5vw solid transparent
-      bottom: 2.5vw solid lightgray
-      left: 5vw solid transparent
+      right: $tile/2 solid transparent
+      bottom: $tile/2/2 solid lightgray
+      left: $tile/2 solid transparent
   &:after
+    z-index: 1
     position: absolute
-    bottom: -2.5vw
+    bottom: (-$tile/6.1)
     right: 0
     content: ""
     border:
-      right: 5vw solid transparent
-      top: 2.5vw solid lightgray
-      left: 5vw solid transparent
+      right: $tile/2 solid transparent
+      top: $tile/2/2 solid lightgray
+      left: $tile/2 solid transparent
 
-[class="7 number"]
+.seven
   display: none
-[class="6 number"],
-[class="8 number"]
+.six,
+.eight
     color: #bf6262
+
+.center-self
+  justify-self: center
+  align-self: center
+
+.center-content
+  justify-content: center
+  align-content: center
+
+.number
+  z-index: 3
+  position: relative
+  margin: 0
+
+.circle
+  display: grid
+  z-index: 2
+  content: ""
+  position: relative
+  background: darken(white,5%)
+  padding: 0
+  border-radius: 50%
+  box-sizing: border-box
+  width: 5vw
+  height: 5vw
 
 .field
   background: $field

@@ -28,50 +28,82 @@ let game = {
     return all
   },
   numbers: {
-    2: 1,
-    3: 2,
-    4: 2,
-    5: 2,
-    6: 2,
-    7: 0,
-    8: 2,
-    9: 2,
-    10: 2,
-    11: 2,
-    12: 1
+    2: [1,'two'],
+    3: [2,'three'],
+    4: [2,'four'],
+    5: [2,'five'],
+    6: [2,'six'],
+    7: [0,'seven'],
+    8: [2,'eight'],
+    9: [2,'nine'],
+    10: [2,'ten'],
+    11: [2,'eleven'],
+    12: [1,'twelve']
   },
   allNumbers : function () {
-    let all = [];
+    let allNumbers = [];
+    let allNames = [];
     for (number in this.numbers) {
-      for (let i = 0; i < this.numbers[number]; i++) {
-        all.push(number)
+      for (let i = 0; i < this.numbers[number][0]; i++) {
+        allNumbers.push(number)
+        allNames.push(this.numbers[number][1])
       }
     }
+    let all = {numbers:allNumbers, names: allNames}
     return all
   },
   randomNumbers : function () {
-    let gameNumbers = []
+    let gameNumbers = {
+      numbers: [],
+      names: []
+    }
     let tmpNumber = this.allNumbers()
 
+
     for (let i = 0; i < 18; i++) {
-      let random = Math.floor(Math.random() * tmpNumber.length)
-      gameNumbers.push(tmpNumber[random])
-      tmpNumber.splice(random,1)
+      let random = Math.floor(Math.random() * tmpNumber.numbers.length)
+      gameNumbers.numbers.push(tmpNumber.numbers[random])
+      gameNumbers.names.push(tmpNumber.names[random])
+
+      tmpNumber.numbers.splice(random,1)
+      tmpNumber.names.splice(random,1)
 
     }
     this.gameNumbers = gameNumbers
     return gameNumbers
   },
-  createBoard : function (boardMap) {
+  createBoard : function () {
+    // Get board dom ref and empty it
     const board = document.querySelector('.board')
     board.innerHTML = ""
-    let desertIndex = boardMap.indexOf('desert')
-    let gameNumbers = this.gameNumbers
-    gameNumbers.splice(desertIndex,0,'7')
 
-    for (let resource in boardMap) {
-      const tile = makeElement('div',"",`${boardMap[resource]} tile`)
-      const num = makeElement('p',gameNumbers[resource],`${gameNumbers[resource]} number`)
+    // check if there is a generated board
+    // if not generate it
+    if (!this.gameBoard) {
+      this.randomBoard()
+    }
+
+    // check if there are generated numbers
+    // if not generate them
+    if (!this.gameNumbers) {
+      this.randomNumbers()
+    }
+
+    // get the generated random numbers
+    let gameNumbers = this.gameNumbers
+
+    // get index of desert tile
+    // and add 7, at desert index in numbers
+    let desertIndex = this.gameBoard.indexOf('desert')
+    gameNumbers.numbers.splice(desertIndex,0,'7')
+
+    // for each tile in board map
+    for (let resource in this.gameBoard) {
+      // make HTML elements
+      const tile = makeElement('div',"",`${this.gameBoard[resource]} tile`)
+      const num = makeElement('p',gameNumbers.numbers[resource],`${gameNumbers.names[resource]} number center-self`)
+      const circle = makeElement('div','','circle center-self')
+
       if (resource <= 2) {
         tile.classList.add('row1')
       }
@@ -88,7 +120,8 @@ let game = {
         tile.classList.add('row5')
       }
 
-      tile.appendChild(num)
+      circle.appendChild(num)
+      tile.appendChild(circle)
       board.appendChild(tile)
     }
   },
@@ -142,9 +175,9 @@ let game = {
       tmpBoard.splice(random,1)
 
       //console.log(i);
-      console.log('random number:',random);
-      console.log('game board:',gameBoard.length);
-      console.log('tmpboard:',tmpBoard.length);
+      // console.log('random number:',random);
+      // console.log('game board:',gameBoard.length);
+      // console.log('tmpboard:',tmpBoard.length);
 
     }
     this.gameBoard = gameBoard
@@ -158,3 +191,5 @@ randomizeButton.addEventListener('click',(e) => {
   game.randomNumbers()
   game.createBoard(game.randomBoard())
 })
+
+game.createBoard()
